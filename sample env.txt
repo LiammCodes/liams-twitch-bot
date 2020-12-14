@@ -1,0 +1,21 @@
+# .env
+# fill out these variables and rename file to '.env'
+# (dont touch the BOT_PREFIX)
+
+# Twitch Bot
+TMI_TOKEN=
+CLIENT_ID=
+BOT_NICK=
+BOT_PREFIX=!
+CHANNEL=
+
+# Spotify Authorization
+# (info can be found on the spotify web api website)
+SPOTIPY_CLIENT_ID=
+SPOTIPY_CLIENT_SECRET=
+SPOTIPY_REDIRECT_URI=
+SPOTIFY_USERNAME=
+
+#aditional info (only fill what you'd like)
+GITHUB_LINK=
+DISCORD_LINK=
