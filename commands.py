@@ -12,6 +12,7 @@ import colorama
 import requests
 import webbrowser
 import spotipy.util as util
+from googletrans import Translator
 from json.decoder import JSONDecodeError
 from spotipy.oauth2 import SpotifyClientCredentials
 from colorama import Fore, Back
@@ -72,6 +73,11 @@ def queue_song(song_name, author):
 
     print(response.text)
     return name + " by " + artist + " has been queued!"
+
+def translate(text):
+    translator = Translator()
+    result = translator.translate(text, dest="en")
+    return result.text
 
 def github():
     return os.environ['GITHUB_LINK']

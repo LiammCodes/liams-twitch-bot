@@ -8,6 +8,7 @@ import os
 import sys
 import json
 import codecs
+import random
 import spotipy
 import requests
 import webbrowser
@@ -61,17 +62,17 @@ async def event_message(ctx):
 # cammands command
 @bot.command(name='commands')
 async def commandshelp(ctx):
-    await ctx.send('!songrequest [name of song] - !discord - !github')
+    await ctx.send('!songrequest <name of song> - !translate <message> - !8ball <ask anything> - !discord - !github')
 
 # github command
 @bot.command(name='github')
 async def print_github(ctx):
-    await ctx.send(comm.github())
+    await ctx.send(f"Check out some of my Python projects! {comm.github()}")
 
 # discord command
 @bot.command(name='discord')
 async def print_discord(ctx):
-    await ctx.send(comm.discord())
+    await ctx.send(f"Join our discord community! {comm.discord()}")
 
 # songrequest command
 @bot.command(name='songrequest')
@@ -80,7 +81,11 @@ async def songrequest(ctx):
     song_name = message[13:]
 
     if len(message) < 14:
-        await ctx.send('Song request usage: !songrequest song.')
+        await ctx.send('Song request usage: !songrequest <song name>')
+    
+    elif "https://" in message:
+        await ctx.send("Song request does not accept URL's, usage: !songrquest <song name>")
+
     else:
         await ctx.send(comm.queue_song(song_name, ctx.author.name))
 
@@ -91,9 +96,46 @@ async def sr(ctx):
     song_name = message[4:]
 
     if len(message) < 5:
-        await ctx.send('Song request usage: !songrequest song.')
+        await ctx.send('Song request usage: !sr <song name>')
+
+    elif "https://" in message:
+        await ctx.send("Song request does not accept URL's, usage: !sr <song name>")
+
     else:
         await ctx.send(comm.queue_song(song_name, ctx.author.name))
+
+# translation command (for ghost241)
+@bot.command(name='translate')
+async def translate(ctx):
+    message = str(ctx.content)
+    text = message[10:]
+    
+    if len(message) < 13:
+        await ctx.send('Translation usage: !translate <message>')
+    else:
+        await ctx.send(f"{ctx.author.name} says: {comm.translate(text)}")
+
+# tr command (translation shortened)
+@bot.command(name='tr')
+async def tr(ctx):
+    message = str(ctx.content)
+    text = message[4:]
+    
+    if len(message) < 5:
+        await ctx.send('Translation usage: !tr <message>')
+    else:
+        await ctx.send(f"{ctx.author.name} says: {comm.translate(text)}")
+
+# 8ball game
+@bot.command(name='8ball')
+async def tr(ctx):
+    message = str(ctx.content)
+    choices = ["Yes 100%!", "It will never happen...", "You will never know...", "Your question is stupid, you will die.", "Obviously.", "Idk brother..."]
+    
+    if len(message) < 9:
+        await ctx.send('8ball usage: !8ball <ask me anything>')
+    else:
+        await ctx.send(f"{random.choice(choices)}")
 
 # bot.py
 if __name__ == "__main__":
