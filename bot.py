@@ -1,21 +1,11 @@
-# Liam's Bot
+# Liam's Twitch Bot
 # by Liam Moore
 # March 30, 2020
 
 # imports
-import re
 import os
-import sys
-import json
-import codecs
-import spotipy
-import requests
-import webbrowser
 import commands as comm
-import spotipy.util as util
 from twitchio.ext import commands
-from json.decoder import JSONDecodeError
-from spotipy.oauth2 import SpotifyClientCredentials
 
 # Set environment tables as variables
 irc_token=os.environ['TMI_TOKEN']
@@ -32,14 +22,13 @@ if [x for x in (irc_token, client_id, nick, prefix, initial_channels) if x is No
 # create bot object
 bot = commands.Bot(
     # set up the bot
-    irc_token=irc_token,
+    token=irc_token,
     client_id=client_id,
     nick=nick,
     prefix=prefix,
     initial_channels=initial_channels
 )
 
-# bot.py, below bot object
 @bot.event
 async def event_ready():
     'Called once when the bot goes online.'
@@ -73,10 +62,15 @@ async def print_github(ctx):
 async def print_discord(ctx):
     await ctx.send(comm.discord())
 
+# carx pw command
+@bot.command(name='pw')
+async def print_pw(ctx):
+    await ctx.send(comm.pw())
+
 # songrequest command
 @bot.command(name='songrequest')
 async def songrequest(ctx):
-    message = str(ctx.content)
+    message = str(ctx.message.content)
     song_name = message[13:]
 
     if len(message) < 14:
@@ -87,7 +81,7 @@ async def songrequest(ctx):
 # sr command (songrequest shortened)
 @bot.command(name='sr')
 async def sr(ctx):
-    message = str(ctx.content)
+    message = str(ctx.message.content)
     song_name = message[4:]
 
     if len(message) < 5:

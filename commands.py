@@ -4,17 +4,10 @@
 
 # imports
 import os
-import sys
-import json
-import codecs
 import spotipy
-import colorama
 import requests
-import webbrowser
 import spotipy.util as util
-from json.decoder import JSONDecodeError
-from spotipy.oauth2 import SpotifyClientCredentials
-from colorama import Fore, Back
+from colorama import Fore
 
 # queue song function
 def queue_song(song_name, author):
@@ -78,3 +71,6 @@ def github():
 
 def discord():
     return os.environ['DISCORD_LINK']
+
+def pw():
+    return os.environ['CARX_PW']

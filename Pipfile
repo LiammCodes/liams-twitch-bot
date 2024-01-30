@@ -1,15 +1,15 @@
 [[source]]
-name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+spotipy = "*"
+colorama = "*"
+twitchio = "*"
 
 [dev-packages]
 
-[packages]
-spotipy = "*"
-requests = "*"
-discord-py = "*"
-colorama = "*"
-
 [requires]
-python_version = "3.7"
+python_version = "3.9"
