@@ -3,6 +3,8 @@
 # (dont touch the BOT_PREFIX)
 
 # Twitch Bot
+# Use this site to auth
+# https://twitchtokengenerator.com/
 TMI_TOKEN=
 CLIENT_ID=
 BOT_NICK=
